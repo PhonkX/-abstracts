@@ -1,0 +1,59 @@
+#Способы доступа к файлам
+
+##FTP
+File Transfer Protocol
+21 TCP-порт - сокет для команд
+
+telnet ftp.debian.org 21
+>220 Hello, ...
+
+<----Авторизация--->
+<USER vasya
+>300 OK Vasya
+<PASS my_secret_password
+>230 OK
+<------------------>
+
+У сервера два режима - активный и пассивный
+
+<PORT 192,168,10,3,32,70 (айпи, доступный для сервера) //включение активного режима
+				   32*256*70=8262
+			
+у себя: nc-l 8262 - запускаем серверный сокет
+>200 OK
+<LIST	
+PASV - узнать порт у сервера (по такой схеме) - пассивный режим
+
+Основные команды:
+HELP
+CWD - переход по каталогам
+LIST - список файлов в текущей директории
+RETR /имя/файла - получить содержимое файла
+STOR /имя/файла - сохраняет файл на сервер
+
+proFTPd - один из самых популярных ftp-серверов в Linux
+
+/etc/proftpd/proftpd.conf
+работает только с системными пользователями (из /etc/passwd)
+
+Текстовый клиент для ftp - команда ftp
+
+## Samba
+Linux-реализация протокола SMB
+
+/etc/samba/samba.conf
+
+smbclient
+
+smbclient '\\localhost\all_drives'
+
+## SSL
+
+apt-get install openssh-server
+
+ssh -X адрес - проброс X-сервера
+
+scp user@192.168.5.3:/home/vasya/text.tvt text.tvt
+scp a.out debian.org:~
+
+WinSCP - клиент под винду
