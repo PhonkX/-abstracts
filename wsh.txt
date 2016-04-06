@@ -1,0 +1,21 @@
+WSH - Windows Scripting Host
+JScript или VBScript
+Удобный доступ к COM-объектам.
+
+csript.exe - интерпретатор WSH (консольный)
+wscript.exe - оконный интерпретатор
+.js, .vbs - типы файлов WSH
+
+## WScript -  главный объект WSH
+WScript.Echo - вывод текста на экран
+WScript.StdIn/StdOut/StdErr		.WriteLine();
+WScript.Sleep(msec); - остановка на msec миллисекунд
+WScript.Quit(errorLevel) - выход с кодом.
+WScript.Arguments - аргументы командной строки
+
+WshShell - COM-объект для общения с оболочкой
+var WshShell = WScript.CreateObject("WScript.Shell");
+
+WshShell.RegRead/RegWrite/RegDelete - работа с реестром Windows
+WshShell.Run("explorer.exe"); - запуск процессов
+WshShell.AppActivate("Имя окна");
