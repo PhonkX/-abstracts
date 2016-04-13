@@ -1,0 +1,5 @@
+<files>
+	<file os = "win" name = "autoexec.bat" />
+	<file os = "win" name = "config.sys" />
+	<file os = "linux" name = "/etc/passwd" />
+</files>
