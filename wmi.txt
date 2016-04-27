@@ -1,0 +1,24 @@
+## WMI
+Windows Management Instrumentation
+
+Хранилище объектов.
+Зарегистрированные типы классов, описывающих структуру этих объетов - свойства, методы.
+
+Win32_Process - текущие запущенные процессы
+Win32_Service - системные службы
+
+wbemtest.exe - позволяет исследовать хранилище этих объектов
+root\cimv2 - пространство имён
+
+```
+objSWBEMLLocator = new ActiveXObject("WbemScripting.SWbemLocator");
+objService = objSWBEMLLocator.ConnectServer(".", "root\\CIMV2");
+
+objSrv = objService.Get("Win32_Service.Name='SkypeUpdate'");
+WScript.Echo(objSrv.state);
+WScript.Echo(objSrv.started);
+WScript.Echo(objSrv.StartMode);
+objSrv.StopService();
+WScript.Sleep(2000);
+WScript.Echo(objSrv.state);
+```

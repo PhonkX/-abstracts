@@ -1,0 +1,36 @@
+# WMI: события
+На WMI-хранилище можно смотреть как на базу данных.
+
+WQL - WMI Query Language
+SELECT * From Win32_Process
+
+SELECT * From Win32_Service Where Name = 'W32Time'
+
+```
+objWMIService = GetObject("winmgmts:\\\\.\\root\\CIMV2");
+var colItems = objWMIService.ExecQuery(
+    "SELECT * From Win32_Service " + 
+    "where Name = 'W32Time' or Name = 'SkypeUpdate' ");
+var e = new Enumerator(colItems);
+for(; !e.atEnd(); e.MoveNext()){
+    WScript.Echo(e.item().name):
+}
+```
+
+## События
+События создания объекта, изменения объекта и удаления объекта
+
+```
+objWMIService = GetObject("winmgmts:\\\\.\\root\\CIMV2");
+serviceProcess = objWMIService.ExecNotificationQuery(
+    "SELECT * FROM __InstanceModificationEvent " + "WITHIN 1 WHERE TargetInstance IAS 'Win32_Service'");
+WScript.Echo ("Waiting for process to stop ...");
+while(1) {
+    objLatestEvent = serviceMonitor.NextEvent();
+    instance = latestEvent.TargetInstance;
+    WScript.Echo ("Service Name: " + instance.Name );
+}
+```
+__InstanceCreationEvent - событие на создание объекта
+__InstanceModificationEvent - события еа изменение объекта
+__InstanceDeletionEvent - событие на удаление объекта

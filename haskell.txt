@@ -1,0 +1,24 @@
+Работа с файлами
+readFile :: FilePath -> String
+writeFile :: FilePath -> String -> IO()
+------------------------------------------
+lines :: String -> [String] - разбивает строку на список строк по переводу строки
+unlines :: [String] -> String
+
+main = do
+    s<-readFile "in.txt"
+    let ss = lines s
+    let ts = map reverse ss
+    writeFile "out.txt" $ unlines ts
+
+words - разбивает строку на слова по пробелам
+
+лямбда-функции:
+\аргумент -> возврат
+обязательно \
+\x -> ...
+\x y -> x + y
+
+import System.Environment
+
+getArgs - возвращает список аргументов командной строки
